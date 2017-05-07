@@ -70,6 +70,14 @@
 // console.log(s);
 // 3 || console.log(1) && (console.log(2) || console.log(3));
 
-console.log(isFinite(2/0));
+// console.log(isFinite(2/0));
+
+var str = '-ms-uiaysd-ysh'
+
+var ss = str.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function (ss,a) {
+    console.log(ss+' '+a);
+})
+
+console.log(ss);
 
 // console.log(0 || 2 && (3 || 4));

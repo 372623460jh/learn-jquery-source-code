@@ -26,8 +26,8 @@ var jquery = {
             'core_rnotwhite ': "全局匹配所有非空格出现1次或多次（/\S+/g）",
             'rquickExpr ': "正则表达式匹配类似<div>www,#www,/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/",
             'rsingleTag ': "匹配<div>,<div></div>,<br/>",
-            'rmsPrefix ': "/^-ms-/",
-            'rdashAlpha ': "/-([\da-z])/gi",
+            'rmsPrefix ': "/^-ms-/用来匹配以-ms-开头的串只在camelCase中用到过",
+            'rdashAlpha ': "/-([\da-z])/gi只在camelCase方法中用来转换为驼峰法命名",
             "rhtml": "匹配<或者类似&nbsp;之类的字串",
             "rtagName": "匹配<后出现1次或多次的[a-zA-Z0-9_:]",
             "wrapMap": "",
@@ -35,6 +35,8 @@ var jquery = {
         },
         "闭包外部作用域方法（闭包的私有方法）": {
             "isArraylike": "判断传入的是不是一个伪数组或数组或有length属性的dom元素",
+            "fcamelCase":"只在camelCase方法中用来转换为驼峰法命名",
+            "completed":"",
         },
     },
     "jQuery（闭包jQuery的构造方法)": {
@@ -93,7 +95,12 @@ var jquery = {
             "parseHTML": "解析传入的html字串返回一个根据html字串解析后的dom数组",
             "parseJSON": "使用JSON.parse方法将json串转换为一个js对象",
             "parseXML": "",
-            "noop":"一个空方法",
+            "noop": "一个空方法",
+            "trim": "利用string的trim方法来去除字符串的首尾空格",
+            "globalEval": "执行一个js代码段如果代码段中包含use strict就在全局中执行该代码，如果不包含就在就是用eval在局部中执行该代码",
+            "nodeName": "该方法用于检测传入的dom节点名字是不是name",
+            "camelCase": "将入参中的-ms-开头的替换为ms-，再将-([\da-z])的$0转化为大写字母，该方法的作用是使-ms-开头的使用驼峰法来命名",
+
         },
     }
 }

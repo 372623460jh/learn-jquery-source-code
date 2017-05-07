@@ -74,14 +74,13 @@
         // Strict HTML recognition (#11290: must start with <)
         rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
-        //匹配<div>,<div></div>,<br/>
+        // 匹配<div>,<div></div>,<br/>
         rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
-
-        // Matches dashed string for camelizing
+        // 在camelCase中用来转换驼峰命名
         rmsPrefix = /^-ms-/,
         rdashAlpha = /-([\da-z])/gi,
 
-        // Used by jQuery.camelCase as callback to replace()
+        // 在jQuery.camelCase中使用Used by jQuery.camelCase as callback to replace()
         fcamelCase = function (all, letter) {
             return letter.toUpperCase();
         },
@@ -514,36 +513,35 @@
         noop: function () {
         },
 
-        // Evaluates a script in a global context
+        // 执行一个js代码段如果代码段中包含use strict就在全局中执行该代码，如果不包含就在就是用eval在局部中执行该代码
         globalEval: function (code) {
             var script,
                 indirect = eval;
-
-            code = jQuery.trim(code);
-
+            code = jQuery.trim(code);//去除code中的首尾空格
             if (code) {
-                // If the code includes a valid, prologue position
-                // strict mode pragma, execute code by injecting a
-                // script tag into the document.
+                // 如果code中的包含use strict就创建一个script标签将代码添加到script标签中并把标签添加到head标签
+                // 的最后面,再移除该节点（添加script节点就会执行该标签中js代码执行代码完成后就移除该标签，globalEval
+                // 的作用域是全局的，eval的作用域是局部的）
                 if (code.indexOf("use strict") === 1) {
                     script = document.createElement("script");
                     script.text = code;
                     document.head.appendChild(script).parentNode.removeChild(script);
                 } else {
-                    // Otherwise, avoid the DOM node creation, insertion
-                    // and removal by using an indirect global eval
+                    // 如果code中的不包含use strict就调用eval来执行该代码段
+                    // （eval的作用域是局部的）
                     indirect(code);
                 }
             }
         },
 
-        // Convert dashed to camelCase; used by the css and data modules
-        // Microsoft forgot to hump their vendor prefix (#9572)
+        // 将入参中的-ms-开头的替换为ms-，再将-([\da-z])的$1转化为大写字母，该方法的作用是使-ms-开头的使用驼峰法来命名
         camelCase: function (string) {
             return string.replace(rmsPrefix, "ms-").replace(rdashAlpha, fcamelCase);
         },
 
+        // 该方法用于检测传入的dom节点名字是不是name
         nodeName: function (elem, name) {
+            // 当elem有nodeName时返回elem的name是否和入参中的name相等，否则则返回false
             return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
         },
 
@@ -592,6 +590,7 @@
             return obj;
         },
 
+        // 利用string的trim方法来去除字符串的首尾空格
         trim: function (text) {
             return text == null ? "" : core_trim.call(text);
         },
@@ -849,6 +848,10 @@
 
 // All jQuery objects should point back to these
     rootjQuery = jQuery(document);
+
+
+
+
     /*!
      * Sizzle CSS Selector Engine v1.9.4-pre
      * http://sizzlejs.com/
@@ -2836,10 +2839,11 @@
 
 
     })(window);
-// String to Object options format cache
+
+    // String to Object options format cache
     var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+    // Convert String-formatted options into Object-formatted ones and store in cache
     function createOptions(options) {
         var object = optionsCache[options] = {};
         jQuery.each(options.match(core_rnotwhite) || [], function (_, flag) {
@@ -3033,6 +3037,7 @@
 
         return self;
     };
+
     jQuery.extend({
 
         Deferred: function (func) {
@@ -3174,6 +3179,7 @@
             return deferred.promise();
         }
     });
+
     jQuery.support = (function (support) {
         var input = document.createElement("input"),
             fragment = document.createDocumentFragment(),
@@ -3489,7 +3495,6 @@
     data_user = new Data();
     data_priv = new Data();
 
-
     jQuery.extend({
         acceptData: Data.accepts,
 
@@ -3790,6 +3795,7 @@
             return defer.promise(obj);
         }
     });
+
     var nodeHook, boolHook,
         rclass = /[\t\r\n\f]/g,
         rreturn = /\r/g,
@@ -4212,7 +4218,7 @@
         }
     });
 
-// Hooks for boolean attributes
+    // Hooks for boolean attributes
     boolHook = {
         set: function (elem, value, name) {
             if (value === false) {
@@ -4246,8 +4252,8 @@
         };
     });
 
-// Support: IE9+
-// Selectedness for an option in an optgroup can be inaccurate
+    // Support: IE9+
+    // Selectedness for an option in an optgroup can be inaccurate
     if (!jQuery.support.optSelected) {
         jQuery.propHooks.selected = {
             get: function (elem) {
