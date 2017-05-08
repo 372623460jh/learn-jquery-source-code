@@ -72,7 +72,7 @@
 
 // console.log(isFinite(2/0));
 
-var str = '-ms-uiaysd-ysh'
+var str = '-ms-uiaysd-ysh';
 
 var ss = str.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function (ss,a) {
     console.log(ss+' '+a);
