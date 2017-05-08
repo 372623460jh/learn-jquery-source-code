@@ -78,6 +78,8 @@ var ss = str.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function (ss,a) {
     console.log(ss+' '+a);
 })
 
+//测试更新
+
 console.log(ss);
 
 // console.log(0 || 2 && (3 || 4));
